@@ -2,6 +2,15 @@
   text-align: center;
 }
 
+.bae {
+  padding-top: 50px;
+  height: 200px;
+  background-image: url('./background.jpg');
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -26,6 +35,15 @@
 
 .App-link {
   color: #61dafb;
+}
+
+a {
+  text-decoration: none;
+  color: gray;
+}
+
+a:hover {
+  color: rgb(65, 65, 65);
 }
 
 @keyframes App-logo-spin {

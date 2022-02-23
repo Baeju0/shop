@@ -4,9 +4,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { BrowserRouter } from 'react-router-dom'; //HashRouter도 있는데 Hash는 주소창에 /#/ 추가됨, 더 안전하게 라우팅, #뒤에 적는 것은 서버에 전달X
+
+
 ReactDOM.render(
   <React.StrictMode>
+    <BrowserRouter>
     <App />
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
