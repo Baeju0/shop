@@ -47,7 +47,7 @@ function Detail(props) {
          <input onChange={(e)=>{
              inputData변경(e.target.value)
          }}/>  
-         update 확인용*/}
+         update 확인용!!*/}
          
          {재고 ? <div className="my-alert2">
              <p>재고가 얼마 남지 않았습니다!!!</p>
