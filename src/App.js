@@ -1,15 +1,21 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable no-lone-blocks */
 import logo from './logo.svg';
 import { Button, Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
 import './App.css';
 import { useState } from 'react';
 import sang from './data';
+import axios from 'axios';
 
 import { Link, Route, Switch } from 'react-router-dom';
 import Detail from './Detail.js';
+import data from './data';
 
 function App() {
 
   let [shoes, shoes변경] = useState(sang);
+  let [loading, loading변경] = useState(true);
+  let [재고,재고변경] = useState([10,11,12]);
 
 
   return (
@@ -52,12 +58,35 @@ function App() {
             )
           })}
         </div>
+
+
+          {/* 마지막 상품일 때 더보기 버튼 없애기 */}
+        <button className='btn btn-primary' onClick={()=>{
+
+          // 서버에 데이터 보내고 싶을 때!
+          // axios.post('서버URL',{id : 'codingapple', pw : 1234});
+
+          // 불러올 동안 로딩중이라는 UI 띄우기
+          {loading? <div><p>로딩중</p></div> : null}
+          
+          axios.get('https://codingapple1.github.io/shop/data2.json')
+          .then((result)=> {
+            loading변경(false)
+            shoes변경([...shoes, ...result.data])
+          })
+          .catch(()=>{
+            loading변경(false)
+            console.log('실패...')
+          })
+
+        }}>더보기</button>
+
         </div>
       </Route>
 
       <Route path="/detail/:id">
         {/* :ㅇㅇ 아무문자가 오든간에 이 페이지를 보여주세요! 파라미터 문법 (: 뒤 맘대로 작명, 여러개 사용 가능)  */}
-          <Detail shoes={shoes}/>
+          <Detail shoes={shoes} 재고={재고} 재고변경={재고변경}/>
       </Route>
 
       <Route path="/:id">

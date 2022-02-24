@@ -1,3 +1,4 @@
+import axios from "axios";
 import {React, useEffect, useState} from "react"
 import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import styled from "styled-components";
@@ -16,12 +17,18 @@ let 제목 = styled.h4`
 
 function Detail(props) {
 
-    let [재고, 재고변경] = useState(true);
+    let [alert, alert변경] = useState(true);
     // let [inputData, inputData변경] = useState('');
+
+
+    // 컴포넌트 로드 시 ajax로 데이터 가져오고 싶을 때!
+    // useEffect(()=> {
+    //     axios.get()
+    // })
 
     useEffect(()=> {
         setTimeout(()=>{
-          재고변경(false)}, 2000);
+          alert변경(false)}, 2000);
     },[]);
 
     let { id } = useParams();
@@ -49,7 +56,7 @@ function Detail(props) {
          }}/>  
          update 확인용!!*/}
          
-         {재고 ? <div className="my-alert2">
+         {alert ? <div className="my-alert2">
              <p>재고가 얼마 남지 않았습니다!!!</p>
          </div> : null }
          
@@ -63,7 +70,12 @@ function Detail(props) {
         <h4 className="pt-5">{상품상세.title}</h4>
         <p>{상품상세.content}</p>
         <p>{상품상세.price}원</p>
-        <button className="btn btn-danger">주문하기</button> 
+
+         <Info 재고={props.재고}></Info>
+
+        <button className="btn btn-danger" onClick={()=> {
+            props.재고변경([9,10,11])
+        }}>주문하기</button> 
         <button className="btn btn-danger" onClick={()=>{
             history.goBack();
             // history.push('/') 이 경로로 이동시켜주세요! 하면 이동시켜줌
@@ -71,6 +83,12 @@ function Detail(props) {
       </div>
     </div>
   </div> )
+  }
+
+  function Info(props) {
+      return(
+          <p>재고 : {props.재고[0]}</p>
+      )
   }
 
   export default Detail;
