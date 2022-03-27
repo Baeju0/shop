@@ -27,7 +27,7 @@ function App() {
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="me-auto">
         <Nav.Link as={Link} to="/">Home</Nav.Link>
-        <Nav.Link as={Link} to="/detail">Detail</Nav.Link>
+        <Nav.Link as={Link} to="/detail/1">Detail</Nav.Link>
         <NavDropdown title="Dropdown" id="basic-nav-dropdown">
           <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
           <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
@@ -45,8 +45,8 @@ function App() {
 
       <Route exact path="/">
       <div className='bae'>
-        <h1>안녕 여긴 신발 파는 곳</h1>
-        <p>사든가 말든가 어쩌구저쩍ㅈ궂ㄱ냠냠</p>
+        <h1>신발 파는 곳!</h1>
+        <p>여러 종류의 신발을 판매하는 쇼핑몰 입니다</p>
         <Button variant="primary">Show More</Button>{' '}
         </div>
 
