@@ -16,13 +16,14 @@ function App() {
   let [shoes, shoes변경] = useState(sang);
   let [loading, loading변경] = useState(true);
   let [재고,재고변경] = useState([10,11,12]);
+  let [dataPage, setDataPage] = useState(2);
 
 
   return (
     <div className="App">
       <Navbar bg="light" expand="lg">
   <Container>
-    <Navbar.Brand href="#home">Shoes Sale</Navbar.Brand>
+    <Navbar.Brand as={Link} to="/">Shoes Sale</Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="me-auto">
@@ -62,20 +63,21 @@ function App() {
 
           {/* 마지막 상품일 때 더보기 버튼 없애기 */}
         <button className='btn btn-primary' onClick={()=>{
-
+          setDataPage(dataPage + 1);
           // 서버에 데이터 보내고 싶을 때!
           // axios.post('서버URL',{id : 'codingapple', pw : 1234});
 
           // 불러올 동안 로딩중이라는 UI 띄우기
           {loading? <div><p>로딩중</p></div> : null}
           
-          axios.get('https://codingapple1.github.io/shop/data2.json')
+          axios.get(`https://codingapple1.github.io/shop/data${dataPage}.json`)
           .then((result)=> {
             loading변경(false)
             shoes변경([...shoes, ...result.data])
           })
           .catch(()=>{
             loading변경(false)
+            alert('추가상품이 없습니다!')
             console.log('실패...')
           })
 
