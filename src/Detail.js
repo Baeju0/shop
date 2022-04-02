@@ -1,8 +1,12 @@
 import axios from "axios";
-import {React, useEffect, useState} from "react"
+import {React, useContext, useEffect, useState} from "react"
+import { useCol } from "react-bootstrap/esm/Col";
 import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import styled from "styled-components";
 import './Detail.scss';
+
+// useContext 사용하기 위해 App.js에서 가져오기
+import {재고context} from './App.js';
 
 let 박스 = styled.div`
     padding: 20px
@@ -19,6 +23,7 @@ function Detail(props) {
 
     let [alert, alert변경] = useState(true);
     // let [inputData, inputData변경] = useState('');
+    let 재고 = useContext(재고context);
 
 
     // 컴포넌트 로드 시 ajax로 데이터 가져오고 싶을 때!
