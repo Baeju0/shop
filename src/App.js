@@ -3,18 +3,24 @@
 import logo from './logo.svg';
 import { Button, Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
 import './App.css';
-import { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import sang from './data';
 import axios from 'axios';
 
 import { Link, Route, Switch } from 'react-router-dom';
 import Detail from './Detail.js';
 import data from './data';
+import reactRouterDom from 'react-router-dom';
+
+// 다른 컴포넌트 파일(js)에도 사용하기 위해 export로 내보내기
+export let 재고context = React.createContext(); //1. createContext는 같은 변수값을 공유할 범위생성
+
 
 function App() {
 
   let [shoes, shoes변경] = useState(sang);
   let [loading, loading변경] = useState(true);
+
   let [재고,재고변경] = useState([10,11,12]);
   let [dataPage, setDataPage] = useState(2);
 
@@ -52,6 +58,9 @@ function App() {
         </div>
 
         <div className='container'>
+        
+        {/* {2. 값 공유를 원하는 HTML들을 범위.Provider로 감싸기. value={공유하고 싶은 데이터 입력} */}
+        <재고context.Provider value={재고}>
         <div className='row'>
           {shoes.map(function(상품, i) {
             return(
@@ -59,13 +68,14 @@ function App() {
             )
           })}
         </div>
+        </재고context.Provider>
 
 
           {/* 마지막 상품일 때 더보기 버튼 없애기 */}
         <button className='btn btn-primary' onClick={()=>{
           setDataPage(dataPage + 1);
           // 서버에 데이터 보내고 싶을 때!
-          // axios.post('서버URL',{id : 'codingapple', pw : 1234});
+          // axios.post('서버URL',{data});
 
           // 불러올 동안 로딩중이라는 UI 띄우기
           {loading? <div><p>로딩중</p></div> : null}
@@ -88,11 +98,13 @@ function App() {
 
       <Route path="/detail/:id">
         {/* :ㅇㅇ 아무문자가 오든간에 이 페이지를 보여주세요! 파라미터 문법 (: 뒤 맘대로 작명, 여러개 사용 가능)  */}
+          <재고context.Provider value={재고}>
           <Detail shoes={shoes} 재고={재고} 재고변경={재고변경}/>
+          </재고context.Provider>
       </Route>
 
       <Route path="/:id">
-          <div>아무거나 적었을 때 이거 보여쥬세요</div>
+          <div>아무거나 적었을 때 이거 보여주세요!</div>
           {/* detail이랑 같이 나옴, 근데 Switch함수 쓰면 스위치처럼 하나가 켜지면 다른 하나만 켜지고 그런 기능 */}
           {/* 매치되는 <Route>들을 전부 보여주지 말고 한번에 하나만 보여주세요! -><Switch>기능 */}
       </Route>
@@ -133,15 +145,26 @@ function App() {
 
 
 function Sang(props) {
+
+  let 재고 = useContext(재고context); //3. useContext()로 공유된 값 사용하기 (props없이 state 사용하기, 그대신 여러번 자식 컴포넌트에 전송해야될 경우에 편함)
+
   return(
         <div className='col-md-4'>
           <img src={'https://codingapple1.github.io/shop/shoes' + (props.i+1) + '.jpg'} width='100%;'/>
           <h4>{props.shoes.title}</h4>
           <p>{props.shoes.content}</p>
           <p>{props.shoes.price}</p>
+          {/* <p>{재고[props.i]}</p> */}
+          <Test/>
+          
         </div>
-  )
-        
+  )       
+}
+
+// 또 하위 컴포넌트에서 사용할 경우 Test
+function Test() {
+  let 재고 = useContext(재고context);
+  return <p> 재고 : {재고[0]} </p>
 }
 
 export default App;
