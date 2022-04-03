@@ -4,6 +4,9 @@ import { useCol } from "react-bootstrap/esm/Col";
 import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import styled from "styled-components";
 import './Detail.scss';
+import { Nav } from "react-bootstrap";
+
+import { CSSTransition } from "react-transition-group";
 
 // useContext 사용하기 위해 App.js에서 가져오기
 import {재고context} from './App.js';
@@ -24,6 +27,10 @@ function Detail(props) {
     let [alert, alert변경] = useState(true);
     // let [inputData, inputData변경] = useState('');
     let 재고 = useContext(재고context);
+
+    // 몇 번째 버튼을 눌렀는지 저장할 state 만들기(tab 기능)
+    let [tab, setTab] = useState(0);
+    let [스위치, 스위치클릭] = useState(false);
 
 
     // 컴포넌트 로드 시 ajax로 데이터 가져오고 싶을 때!
@@ -89,7 +96,55 @@ function Detail(props) {
         }}>뒤로가기</button> 
       </div>
     </div>
-  </div> )
+
+    {/* tab기능 만들기
+         1.UI상태를 true/false state로 저장
+         2.state에 따라 UI 보이고 안 보이고 설정! */}
+        
+        <Nav variant="tabs" defaultActiveKey="link-0">
+         <Nav.Item>
+        <Nav.Link eventKey="link-0" onClick={()=>{ 스위치클릭(false); setTab(0) }}>기본 탭</Nav.Link>
+         </Nav.Item>
+         <Nav.Item>
+           <Nav.Link eventKey="link-1" onClick={()=>{ 스위치클릭(false); setTab(1) }}>첫번째 탭</Nav.Link>
+         </Nav.Item>
+         <Nav.Item>
+           <Nav.Link eventKey="link-2" onClick={()=>{ 스위치클릭(false); setTab(2) }}>두번째 탭</Nav.Link>
+         </Nav.Item>
+        </Nav>
+
+
+         {/* CSSTransition은 yarn add react-transition-group 설치해서 사용하는 애니메이션 라이브러리 */}
+         {/* 애니메이션 효과를 적용하고 싶은 곳 감싸기 */}
+
+         {/* in, classNames, timeout속성 넣기 */}
+         {/* in은 애니메이션 키는 스위치! true면 동작! 이것 또한 변수나 state로 저장해서 사용해야됨 */}
+         {/* classNames을 css로 데려가서 애니메이션 만들기 */}
+         <CSSTransition in={스위치} classNames="hello" timeout={500}>
+
+         {/* Detail 컴포넌트에 tab State가 있기 때문에 props 전송해주기 */}
+          <TabContent tab={tab} 스위치클릭={스위치클릭}/>
+         
+         </CSSTransition>
+
+    </div>
+     )
+  }
+  
+  function TabContent(props) {
+
+    useEffect(()=> {
+        props.스위치클릭(true);
+    })
+         
+    // 두개의 조건이 있을 때 삼항 연산자보단 if문으로 사용하기
+      if(props.tab === 0) {
+          return <div>0번째 내용!</div>
+        } else if(props.tab === 1) {
+          return <div>1번째 내용!</div>
+        } else if(props.tab === 2) {
+          return <div>2번째 내용!</div>
+      }
   }
 
   function Info(props) {
