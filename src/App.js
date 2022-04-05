@@ -11,6 +11,7 @@ import { Link, Route, Switch } from 'react-router-dom';
 import Detail from './Detail.js';
 import data from './data';
 import reactRouterDom from 'react-router-dom';
+import Cart from './Cart.js';
 
 // 다른 컴포넌트 파일(js)에도 사용하기 위해 export로 내보내기
 export let 재고context = React.createContext(); //1. createContext는 같은 변수값을 공유할 범위생성
@@ -36,7 +37,7 @@ function App() {
         <Nav.Link as={Link} to="/">Home</Nav.Link>
         <Nav.Link as={Link} to="/detail/1">Detail</Nav.Link>
         <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-          <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+          <NavDropdown.Item as={Link} to="/cart">Cart</NavDropdown.Item>
           <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
           <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
           <NavDropdown.Divider />
@@ -101,6 +102,10 @@ function App() {
           <재고context.Provider value={재고}>
           <Detail shoes={shoes} 재고={재고} 재고변경={재고변경}/>
           </재고context.Provider>
+      </Route>
+      
+      <Route path="/cart">
+        <Cart></Cart>
       </Route>
 
       <Route path="/:id">

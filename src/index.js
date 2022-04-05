@@ -6,11 +6,19 @@ import reportWebVitals from './reportWebVitals';
 
 import { BrowserRouter } from 'react-router-dom'; //HashRouter도 있는데 Hash는 주소창에 /#/ 추가됨, 더 안전하게 라우팅, #뒤에 적는 것은 서버에 전달X
 
+//redux 사용하기 (값 공유하기 위해)
+import {Provider} from 'react-redux';
+import { createStore } from 'redux';
+
+let store = createStore(()=> {
+  return [{id:0, name : '신기한 신발', quan: 2}] }); //state 초기값
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
+    <Provider store={store}>
     <App />
+    </Provider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
