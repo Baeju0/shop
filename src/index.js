@@ -11,7 +11,7 @@ import {Provider} from 'react-redux';
 import { createStore } from 'redux';
 
 let store = createStore(()=> {
-  return [{id:0, name : '신기한 신발', quan: 2}] }); //state 초기값
+  return [{id:0, name : '리덕스 신발', quan: 2}] }); //state 초기값
 
 ReactDOM.render(
   <React.StrictMode>

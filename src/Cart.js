@@ -14,12 +14,25 @@ function Cart(props) {
                 </tr>
             </thead>
         <tbody>
-                    <tr>
-                    <td>{props.state[0].name}</td> {/* index.js에 있는 '신발' 이라는 값 표출 */}
-                    <td>name</td>
+            {
+                props.state.map((a,i)=>{
+                    return (
+                        <tr key={i}>
+                            <td>{a.id}</td>
+                            <td>{a.name}</td>
+                            <td>{a.quan}</td>
+                            <td>테이블</td>
+                        </tr>
+                    )
+                })
+            }
+                    {/* <tr>
+                    <td>{props.state[0].name}</td> */}
+                     {/* index.js에 있는 '신발' 이라는 값 표출 */}
+                    {/* <td>name</td>
                     <td>테이블</td>
                     <td>Table cell</td>
-                    </tr>
+                    </tr> */}
                 </tbody>
             </Table>
         </div>
