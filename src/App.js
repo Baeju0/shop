@@ -13,6 +13,9 @@ import data from './data';
 import reactRouterDom from 'react-router-dom';
 import Cart from './Cart.js';
 
+// html 파일에서 이미지 사용할 때는 import 하고 {}로 사용하기
+import grim from './background.jpg';
+
 // 다른 컴포넌트 파일(js)에도 사용하기 위해 export로 내보내기
 export let 재고context = React.createContext(); //1. createContext는 같은 변수값을 공유할 범위생성
 
@@ -52,7 +55,7 @@ function App() {
      <Switch>
 
       <Route exact path="/">
-      <div className='bae'>
+      <div className='bae' style={{ backgroundImage : 'url('+ grim +')'}}>
         <h1>신발 파는 곳!</h1>
         <p>여러 종류의 신발을 판매하는 쇼핑몰 입니다</p>
         <Button variant="primary">Show More</Button>{' '}
@@ -118,10 +121,13 @@ function App() {
 
       {/* <Route path="/어쩌구" component={Modal}></Route> */}
 
+      {/* bootstrap grid 사용 */}
       {/* 상품 레이아웃 만들기(웹에선 가로 3개 진열, 앱에선 세로 1열) */}
         {/* <div className='container'>
           <div className='row'>
-            <div className='col-md-4'>
+          새로운 강의 2-2.
+            <div className='col-md-4'> html 파일에서 public 폴더에 있는 이미지 사용할 때는 (*React Create App 참고)
+            <img src={process.env.PUBLIC_URL + '/이미지 이름.png'} 로 사용하면 서버 올릴 때 오류 안 남
               <img src="https://codingapple1.github.io/shop/shoes1.jpg"/>
               <h4>{shoes[0].title}</h4>
               <p>{shoes[0].content}</p>
