@@ -21,7 +21,12 @@ function Cart(props) {
                             <td>{a.id}</td>
                             <td>{a.name}</td>
                             <td>{a.quan}</td>
-                            <td>테이블</td>
+
+                            {/* 수량 버튼 만들기 */}
+                            {/* Redux 쓰는 이유2 */}
+                            {/* reudcer에 데이터 수정 요청(ex.수량증가)할 때는 props.dispatch({type:'-'}) 사용 */}
+                            <td><button onClick={()=> { props.dispatch({ type : '수량증가'})}}>+</button></td>
+                            <td><button onClick={()=> { props.dispatch({ type : '수량감소'})}}>-</button></td>
                         </tr>
                     )
                 })

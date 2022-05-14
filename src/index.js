@@ -9,9 +9,43 @@ import { BrowserRouter } from 'react-router-dom'; //HashRouter도 있는데 Hash
 //redux 사용하기 (값 공유하기 위해)
 import {Provider} from 'react-redux';
 import { createStore } from 'redux';
+import { type } from '@testing-library/user-event/dist/type';
 
-let store = createStore(()=> {
-  return [{id:0, name : '리덕스 신발', quan: 2},{id:1, name: '리액트 신발', quan: 1}] }); //state 초기값
+let defaultState = [
+  {id:0, name : '리덕스 신발', quan: 2},
+  {id:1, name: '리액트 신발', quan: 1}]; //state 초기값
+
+
+// redux에서는 state 데이터의 수정하는 방법을 미리 정의함(state 데이터 관리기능)-Cart수량
+// ↑의 내용이 reducer!! createStore()안에 저장하는 듯, 아무 일 없으면 그냥 초기값 그대로 return
+// reducer는 그냥 수정된 state를 퉤! 뱉는 함수!
+function reducer(state = defaultState, action) {
+   //defaultState자리는 default parameter 문법
+  if ( action.type === '수량증가'){
+
+    let copy = [...state];
+    copy[0].quan++;
+    return copy
+
+  } if ( action.type === '수량감소'){
+    let copy = [...state];
+    if (copy[0].quan > 0)
+    copy[0].quan--;
+    return copy
+  }
+
+   else {
+    return state
+  }
+}
+// 데이터 수정하는 법. if문으로 바뀔 때 바뀌는 state 적용, 아닐 때 그냥 기존 state
+
+
+
+
+// Redux 왜 사용? 복잡한 props 전송 필요할 필요가 없다!
+let store = createStore(reducer)
+
 
 ReactDOM.render(
   <React.StrictMode>
