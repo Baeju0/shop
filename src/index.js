@@ -8,8 +8,15 @@ import { BrowserRouter } from 'react-router-dom'; //HashRouter도 있는데 Hash
 
 //redux 사용하기 (값 공유하기 위해)
 import {Provider} from 'react-redux';
-import { createStore } from 'redux';
+import { combineReducers, createStore } from 'redux';
 import { type } from '@testing-library/user-event/dist/type';
+
+//알림창 상태 저장하는 state + reducer 만들기
+let alertBase = true;
+
+function reducer2(state = alertBase, action) {
+  return state
+}
 
 let defaultState = [
   {id:0, name : '리덕스 신발', quan: 2},
@@ -44,7 +51,8 @@ function reducer(state = defaultState, action) {
 
 
 // Redux 왜 사용? 복잡한 props 전송 필요할 필요가 없다!
-let store = createStore(reducer)
+// reducer 더 만들었으면 combineReducers({}) 사용하기(import 해오기)
+let store = createStore(combineReducers({reducer, reducer2}));
 
 
 ReactDOM.render(

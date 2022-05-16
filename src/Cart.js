@@ -40,15 +40,23 @@ function Cart(props) {
                     </tr> */}
                 </tbody>
             </Table>
+
+            <div className="my-alert2">
+                <p>지금 구매하시면 50% 할인!!</p>
+                <button>닫기</button>
+            </div>
         </div>
     )
 }
 
 // 컴포넌트에서 index.js store에 있는 state 사용하기
 // store 안에 있던 데이터를 다 가져와서 props처럼 만들어주는 함수
+// reducer 여러 개 합치면 store 데이터 뽑아쓸 때 오류남
+// store 데이터는 { reducer:0, reducer2:0 } 이렇게 생김
 function hamsu(state) {
     return {
-        state : state
+        // store 데이터에서 뽑아야되기 때문에 ↓state.reducer라고 써야됨
+        state : state.reducer
     }
 }
 export default connect(hamsu)(Cart)
