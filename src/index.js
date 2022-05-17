@@ -15,7 +15,11 @@ import { type } from '@testing-library/user-event/dist/type';
 let alertBase = true;
 
 function reducer2(state = alertBase, action) {
+  if(action.type === 'alertClose') {
+  return state = false;
+  } else {
   return state
+  }
 }
 
 let defaultState = [

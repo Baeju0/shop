@@ -40,11 +40,21 @@ function Cart(props) {
                     </tr> */}
                 </tbody>
             </Table>
-
+            { props.alertOpen === true?
             <div className="my-alert2">
                 <p>지금 구매하시면 50% 할인!!</p>
-                <button>닫기</button>
-            </div>
+
+                {/* 버튼 누르면 닫기 만들기 - 평소처럼 하면xxx */}
+                {/* index.js에서 데이터 수정하는 방법을 만들고 dispatch사용 */}
+                {/* <button onClick={()=>{
+                    props.alertOpen(false)
+                }}>닫기</button> */}
+
+                {/* 근데 이런 곳에서 redux store에 저장하지 말기, redux는 모든 데이터 관리할 때 사용 */}
+                <button onClick={()=>{
+                    props.dispatch({type : 'alertClose'})}}>닫기
+                </button>
+            </div> : null }
         </div>
     )
 }
@@ -54,9 +64,11 @@ function Cart(props) {
 // reducer 여러 개 합치면 store 데이터 뽑아쓸 때 오류남
 // store 데이터는 { reducer:0, reducer2:0 } 이렇게 생김
 function hamsu(state) {
+    console.log(state);
     return {
         // store 데이터에서 뽑아야되기 때문에 ↓state.reducer라고 써야됨
-        state : state.reducer
+        state : state.reducer,
+        alertOpen : state.reducer2 //UI 모달창
     }
 }
 export default connect(hamsu)(Cart)
