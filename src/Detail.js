@@ -5,6 +5,7 @@ import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min
 import styled from "styled-components";
 import './Detail.scss';
 import { Nav } from "react-bootstrap";
+import { connect } from "react-redux";
 
 import { CSSTransition } from "react-transition-group";
 
@@ -88,6 +89,13 @@ function Detail(props) {
          {/* 주문하기 버튼 누를때 재고-1 하기 */}
         <button className="btn btn-danger" onClick={()=> {
             props.재고변경([9,10,11])
+
+            //※ 이건 하드코딩 버전... 상품에 따른 데이터가 입력되게 하기, 같은 상품이 이미 있으면 수량만 증가시키는 기능
+            props.dispatch({type : '항목추가', payload : {id:2, name:'새로운상품', quan : 1}});
+          
+            //페이지 이동시 강제 새로고침 되어서 데이터가 사라질 시 useHistory Hook사용
+            history.push('/cart');
+
         }}>주문하기</button> 
 
         <button className="btn btn-danger" onClick={()=>{
@@ -153,4 +161,16 @@ function Detail(props) {
       )
   }
 
-  export default Detail;
+  function hamsu(state) {
+    console.log(state);
+    return {
+        state : state.reducer,
+        alertOpen : state.reducer2
+    }
+}
+
+
+  // state를 props화 해주는 것을 써줘야 됨!!그래야 dispatch도 사용 가능
+  export default connect(hamsu)(Detail)
+
+  // export default Detail;

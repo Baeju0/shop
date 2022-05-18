@@ -31,9 +31,18 @@ let defaultState = [
 // ↑의 내용이 reducer!! createStore()안에 저장하는 듯, 아무 일 없으면 그냥 초기값 그대로 return
 // reducer는 그냥 수정된 state를 퉤! 뱉는 함수!
 function reducer(state = defaultState, action) {
-   //defaultState자리는 default parameter 문법
-  if ( action.type === '수량증가'){
+  if( action.type === '항목추가') {
+      let copy = [...state];
 
+      // dispatch해서 데이터 전송하고 전송한 데이터를 사용하려면 action.payload
+      // reducer의 액션 파라미터는 dispatch()할 때 보낸 object임
+      copy.push(action.payload);
+      return copy
+  }
+
+   //defaultState자리는 default parameter 문법
+  else if ( action.type === '수량증가'){
+    
     let copy = [...state];
     copy[0].quan++;
     return copy
