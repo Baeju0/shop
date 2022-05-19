@@ -1,8 +1,22 @@
 import React from "react";
 import { Table } from "react-bootstrap";
-import { connect } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 
 function Cart(props) {
+
+    // 맨 밑에 작성되어 있는 '컴포넌트에서 index.js store에 있는 state 사용하기' 부분 
+
+    // useSelector()
+    // redux에 있던 state 꺼내쓰는 방법! 굳이 props를 작성하지 않아도 됨
+    let state = useSelector((state) => state);
+    // let state = useSelector((state) => state.reducer); 로 하면 state.reducer만 출력 가능
+    // console.log(state.reducer)
+
+    // useDispatch()
+    // dispatch하는 더 쉬운 방법
+    // 굳이 props 안 쓰고 dispatch만 쓰기 가능(밑에 onClick부분)
+    let dispatch = useDispatch();
+
     return(
         <div>
         <Table>
@@ -15,7 +29,7 @@ function Cart(props) {
             </thead>
         <tbody>
             {
-                props.state.map((a,i)=>{
+                state.reducer.map((a,i)=>{
                     return (
                         <tr key={i}>
                             <td>{a.id}</td>
@@ -27,8 +41,8 @@ function Cart(props) {
                             {/* reudcer에 데이터 수정 요청(ex.수량증가)할 때는 props.dispatch({type:'-'}) 사용 */}
                             {/* dispatch()로 수정 요청을 할 때 데이터를 보낼 수도 있음 dispatch({type:'ㅁㅁ', payload: 보낼데이터}) */}
                             {/* ({type ~~~})여기는 action 파라미터임, 보낸 자료는 액션 파라미터에 저장되어있음!!(index) */}
-                            <td><button onClick={()=> { props.dispatch({ type : '수량증가', payload : {name : 'bae'}})}}>+</button></td>
-                            <td><button onClick={()=> { props.dispatch({ type : '수량감소'})}}>-</button></td>
+                            <td><button onClick={()=> { dispatch({ type : '수량증가', payload : {name : 'bae'}})}}>+</button></td>
+                            <td><button onClick={()=> { dispatch({ type : '수량감소'})}}>-</button></td>
                         </tr>
                     )
                 })
@@ -65,14 +79,14 @@ function Cart(props) {
 // store 안에 있던 데이터를 다 가져와서 props처럼 만들어주는 함수
 // reducer 여러 개 합치면 store 데이터 뽑아쓸 때 오류남
 // store 데이터는 { reducer:0, reducer2:0 } 이렇게 생김
-function hamsu(state) {
-    console.log(state);
-    return {
-        // store 데이터에서 뽑아야되기 때문에 ↓state.reducer라고 써야됨
-        state : state.reducer,
-        alertOpen : state.reducer2 //UI 모달창
-    }
-}
-export default connect(hamsu)(Cart)
+// function hamsu(state) {
+//     console.log(state);
+//     return {
+//         // store 데이터에서 뽑아야되기 때문에 ↓state.reducer라고 써야됨
+//         state : state.reducer,
+//         alertOpen : state.reducer2 //UI 모달창
+//     }
+// }
+// export default connect(hamsu)(Cart)
 
-// export default Cart;
+export default Cart;
