@@ -42,9 +42,8 @@ function reducer(state = defaultState, action) {
 
    //defaultState자리는 default parameter 문법
   else if ( action.type === '수량증가'){
-    
     let copy = [...state];
-    copy[0].quan++;
+    copy[action.payload].quan++;
     return copy
 
   } if ( action.type === '수량감소'){

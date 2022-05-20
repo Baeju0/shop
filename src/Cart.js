@@ -8,8 +8,10 @@ function Cart(props) {
 
     // useSelector()
     // redux에 있던 state 꺼내쓰는 방법! 굳이 props를 작성하지 않아도 됨
+    // useSelector()안에 콜백함수 작성하면 redux state가 남는데 이것을 변수에 저장해서 사용
+    // 콜백함수 안에는 파라미터 하나 입력 가능한데 이건 자동으로 store가 됨
     let state = useSelector((state) => state);
-    // let state = useSelector((state) => state.reducer); 로 하면 state.reducer만 출력 가능
+    // 그렇기 때문에 useSelector((state) => state.reducer); 로 하면 state.reducer만 출력 가능
     // console.log(state.reducer)
 
     // useDispatch()
@@ -41,8 +43,8 @@ function Cart(props) {
                             {/* reudcer에 데이터 수정 요청(ex.수량증가)할 때는 props.dispatch({type:'-'}) 사용 */}
                             {/* dispatch()로 수정 요청을 할 때 데이터를 보낼 수도 있음 dispatch({type:'ㅁㅁ', payload: 보낼데이터}) */}
                             {/* ({type ~~~})여기는 action 파라미터임, 보낸 자료는 액션 파라미터에 저장되어있음!!(index) */}
-                            <td><button onClick={()=> { dispatch({ type : '수량증가', payload : {name : 'bae'}})}}>+</button></td>
-                            <td><button onClick={()=> { dispatch({ type : '수량감소'})}}>-</button></td>
+                            <td><button onClick={()=> { dispatch({ type : '수량증가', payload : a.id })}}>+</button></td>
+                            <td><button onClick={()=> { dispatch({ type : '수량감소', payload : a.id })}}>-</button></td>
                         </tr>
                     )
                 })

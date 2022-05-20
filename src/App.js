@@ -15,6 +15,7 @@ import Cart from './Cart.js';
 
 // html 파일에서 이미지 사용할 때는 import 하고 {}로 사용하기
 import grim from './background.jpg';
+import { useHistory } from 'react-router-dom';
 
 // 다른 컴포넌트 파일(js)에도 사용하기 위해 export로 내보내기
 export let 재고context = React.createContext(); //1. createContext는 같은 변수값을 공유할 범위생성
@@ -158,9 +159,11 @@ function App() {
 function Sang(props) {
 
   let 재고 = useContext(재고context); //3. useContext()로 공유된 값 사용하기 (props없이 state 사용하기, 그대신 여러번 자식 컴포넌트에 전송해야될 경우에 편함)
+  let history = useHistory();
 
   return(
-        <div className='col-md-4'>
+    // 컴포넌트에 직접 onClick 못 함! 컴포넌트 안에다가 작성해야 됨
+        <div className='col-md-4' onClick={()=>{history.push('/detail/' + props.shoes.id)}}>
           <img src={'https://codingapple1.github.io/shop/shoes' + (props.i+1) + '.jpg'} width='100%;'/>
           <h4>{props.shoes.title}</h4>
           <p>{props.shoes.content}</p>
