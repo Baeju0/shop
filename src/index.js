@@ -32,16 +32,29 @@ let defaultState = [
 // reducer는 그냥 수정된 state를 퉤! 뱉는 함수!
 function reducer(state = defaultState, action) {
   if( action.type === '항목추가') {
-      let copy = [...state];
 
+      // state 안에 id : 액션.데이터인 항목이 있는가?
+      // findIndex : Array안에서 원하는 데이터 찾아주는 js함수
+      // 파라미터 함수 넣어주고 (a), 리턴하면서 array 안에 있던 a라는 데이터와 === ??? 와 일치하는가?
+      // 값이 맞다면 어레이 몇 번 째인지 결과값이 나옴
+      let found = state.findIndex(((a)=>{ return a.id === action.payload.id});
+
+      // 상품 추가된 게 있을 때, 중복으로 항목 생성하지 않고 수량만 증가
+      if( found >= 0 ) {
+        let copy = [...state];
+        copy[found].quan++;
+        return copy
+
+      } else {
+      let copy = [...state];
       // dispatch해서 데이터 전송하고 전송한 데이터를 사용하려면 action.payload
       // reducer의 액션 파라미터는 dispatch()할 때 보낸 object임
       copy.push(action.payload);
       return copy
-  }
+      }
 
    //defaultState자리는 default parameter 문법
-  else if ( action.type === '수량증가'){
+    } else if ( action.type === '수량증가'){
     let copy = [...state];
     copy[action.payload].quan++;
     return copy

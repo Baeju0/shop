@@ -91,7 +91,7 @@ function Detail(props) {
             props.재고변경([9,10,11])
 
             //※ 이건 하드코딩 버전... 상품에 따른 데이터가 입력되게 하기, 같은 상품이 이미 있으면 수량만 증가시키는 기능
-            props.dispatch({type : '항목추가', payload : {id:2, name:'새로운상품', quan : 1}});
+            props.dispatch({type : '항목추가', payload : {id:상품상세.id, name:상품상세.title, quan : 1}});
           
             //페이지 이동시 강제 새로고침 되어서 데이터가 사라질 시 useHistory Hook사용
             history.push('/cart');
