@@ -37,13 +37,12 @@ function reducer(state = defaultState, action) {
       // findIndex : Array안에서 원하는 데이터 찾아주는 js함수
       // 파라미터 함수 넣어주고 (a), 리턴하면서 array 안에 있던 a라는 데이터와 === ??? 와 일치하는가?
       // 값이 맞다면 어레이 몇 번 째인지 결과값이 나옴
-      let found = state.findIndex(((a)=>{ return a.id === action.payload.id});
+      let found = state.findIndex((a)=>{ return a.id === action.payload.id});
 
       // 상품 추가된 게 있을 때, 중복으로 항목 생성하지 않고 수량만 증가
       if( found >= 0 ) {
         let copy = [...state];
         copy[found].quan++;
-        return copy
 
       } else {
       let copy = [...state];
@@ -95,3 +94,9 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+
+// *새로운 상품 수량 추가 버그
+// *주문하기 버튼 옆에 수량 input 생성
+// *상품 사이즈 저장 or 상품 사이즈 선택
+// *장바구니 항목 삭제
