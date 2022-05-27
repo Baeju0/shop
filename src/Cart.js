@@ -4,6 +4,10 @@ import { connect, useDispatch, useSelector } from "react-redux";
 
 function Cart(props) {
 
+    // 1. 함수나 오브젝트는 선언해서 사용하기
+    // 2. 애니메이션(css - transform속성 사용하기)
+
+
     // 맨 밑에 작성되어 있는 '컴포넌트에서 index.js store에 있는 state 사용하기' 부분 
 
     // useSelector()

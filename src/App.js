@@ -3,12 +3,12 @@
 import logo from './logo.svg';
 import { Button, Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
 import './App.css';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, lazy, Suspense } from 'react';
 import sang from './data';
 import axios from 'axios';
 
 import { Link, Route, Switch } from 'react-router-dom';
-import Detail from './Detail.js';
+
 import data from './data';
 import reactRouterDom from 'react-router-dom';
 import Cart from './Cart.js';
@@ -17,9 +17,15 @@ import Cart from './Cart.js';
 import grim from './background.jpg';
 import { useHistory } from 'react-router-dom';
 
+// lazy 속성, Suspense 사용
+// import Detail from './Detail.js';
+let Detail = lazy( ()=>{ return import('./Detail.js')});
+
 // 다른 컴포넌트 파일(js)에도 사용하기 위해 export로 내보내기
 export let 재고context = React.createContext(); //1. createContext는 같은 변수값을 공유할 범위생성
 
+// 컴포넌트 import는 App.js 방문 시 미리 다 불러오는 것,
+// 필요해질 시점에 import가 하고 싶다면 lazy loading
 
 function App() {
 
@@ -104,7 +110,11 @@ function App() {
       <Route path="/detail/:id">
         {/* :ㅇㅇ 아무문자가 오든간에 이 페이지를 보여주세요! 파라미터 문법 (: 뒤 맘대로 작명, 여러개 사용 가능)  */}
           <재고context.Provider value={재고}>
+            
+            {/* lazy loading 할 때 로딩 중에 보여질 임시 메시지 */}
+          <Suspense fallback={<div>로딩중입니당</div>}>
           <Detail shoes={shoes} 재고={재고} 재고변경={재고변경}/>
+          </Suspense>
           </재고context.Provider>
       </Route>
       
