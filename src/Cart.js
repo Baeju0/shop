@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, memo } from "react";
 import { Table } from "react-bootstrap";
 import { connect, useDispatch, useSelector } from "react-redux";
 
@@ -77,6 +77,7 @@ function Cart(props) {
                     props.dispatch({type : 'alertClose'})}}>닫기
                 </button>
             </div> : null }
+            <Parent 이름="쥬용" 나이="22"/>
         </div>
     )
 }
@@ -94,5 +95,32 @@ function Cart(props) {
 //     }
 // }
 // export default connect(hamsu)(Cart)
+
+
+// 예시용 컴포넌트임, memo
+// 하나의 컴포넌트만 변경했는데, 둘 다 재렌더링이 되는 것을 막기 위해 사용
+// react에서의 {memo} import 하기
+// 사용하고 싶은 컴포넌트를 memo()로 감싸기
+// 감싸게 되면 그 컴포넌트와 관련된 props의 정보가 변경될때만 재렌더링 됨
+
+function Parent(props){
+    return (
+        <div>
+            <Child1 이름={props.이름}></Child1>
+            <Child2 이름={props.나이}></Child2>
+        </div>
+    )
+}
+
+function Child1(props){
+    useEffect(()=> { console.log('1번 렌더링됨!')});
+    return <div>첫 번째</div>
+}
+
+// 단점은 기존 props와 바뀐 props를 비교한 후 컴포넌트를 업뎃할지 말지 결정함>> 자주 바뀌는 데이터면 용량 과다 사용!!!
+let Child2 = memo(function(){
+    useEffect(()=> { console.log('2번 렌더링됨!')});
+    return <div>두 번째</div>
+});
 
 export default Cart;
