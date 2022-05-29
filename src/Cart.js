@@ -97,6 +97,7 @@ function Cart(props) {
 // export default connect(hamsu)(Cart)
 
 
+
 // 예시용 컴포넌트임, memo
 // 하나의 컴포넌트만 변경했는데, 둘 다 재렌더링이 되는 것을 막기 위해 사용
 // react에서의 {memo} import 하기
@@ -122,5 +123,18 @@ let Child2 = memo(function(){
     useEffect(()=> { console.log('2번 렌더링됨!')});
     return <div>두 번째</div>
 });
+
+
+
+// localStorage 문법(3개)
+// 자료저장 localStorage.setItem
+// 자료출력 localStorage.getItem
+// 자료삭제 localStorage.removeItem
+
+// ※ 주의점 localStorage에 object자료를 저장하면 object가 깨짐, 문자나 숫자만 저장 가능
+// 하지만, localStorage에 object를 글자인척! 하면 저장됨(JSON자료형)
+// ex) localStorage.setItem('obj',JSON.stringify({name:'kim"}))
+// 출력할 때도 글자로 나오기 때문에 object로 바꾸기 위해서 변수로 저장하고 JSON.parse() 사용
+
 
 export default Cart;

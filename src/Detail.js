@@ -20,8 +20,15 @@ let 제목 = styled.h4`
     font-size: 25px;
     color : ${ props => props.색상 }
 `;
-
 // CSS를 미리 입혀놓은 컴포넌트 생성해서 CSS스타일링하기! (styled-components) 물론 취향차이로 사용ㅇ
+
+// '최근 본 항목' 코드 짜보기
+// 1. 누가 Detail페이지 들어가면
+// 2 localStorage에 있는 항목을 꺼낸다!
+// 3. 경우가 두 가지(방문한 항목이 없을 경우(null), 항목[]이 있는 경우)
+// 4. []가 나오면 여기에 URL파라미터의 id부분을 push()하기(추가하기) /detail/0에 접속하면 [0,1,2] 여기에 push(0)하는 것처럼
+// 5. 중복 처리하기(4. array에 0이 있으면 처리하지 마세요!! Tip.Set자료형)
+// 6. []를 다시 localStorage에 저장함(JSON형식으로)
 
 function Detail(props) {
 
