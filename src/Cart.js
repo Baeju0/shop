@@ -77,7 +77,7 @@ function Cart(props) {
                     props.dispatch({type : 'alertClose'})}}>닫기
                 </button>
             </div> : null }
-            <Parent 이름="쥬용" 나이="22"/>
+            {/* <Parent 이름="쥬용" 나이="22"/> */}
         </div>
     )
 }
@@ -104,25 +104,25 @@ function Cart(props) {
 // 사용하고 싶은 컴포넌트를 memo()로 감싸기
 // 감싸게 되면 그 컴포넌트와 관련된 props의 정보가 변경될때만 재렌더링 됨
 
-function Parent(props){
-    return (
-        <div>
-            <Child1 이름={props.이름}></Child1>
-            <Child2 이름={props.나이}></Child2>
-        </div>
-    )
-}
+// function Parent(props){
+//     return (
+//         <div>
+//             <Child1 이름={props.이름}></Child1>
+//             <Child2 이름={props.나이}></Child2>
+//         </div>
+//     )
+// }
 
-function Child1(props){
-    useEffect(()=> { console.log('1번 렌더링됨!')});
-    return <div>첫 번째</div>
-}
+// function Child1(props){
+//     useEffect(()=> { console.log('1번 렌더링됨!')});
+//     return <div>첫 번째</div>
+// }
 
-// 단점은 기존 props와 바뀐 props를 비교한 후 컴포넌트를 업뎃할지 말지 결정함>> 자주 바뀌는 데이터면 용량 과다 사용!!!
-let Child2 = memo(function(){
-    useEffect(()=> { console.log('2번 렌더링됨!')});
-    return <div>두 번째</div>
-});
+// // 단점은 기존 props와 바뀐 props를 비교한 후 컴포넌트를 업뎃할지 말지 결정함>> 자주 바뀌는 데이터면 용량 과다 사용!!!
+// let Child2 = memo(function(){
+//     useEffect(()=> { console.log('2번 렌더링됨!')});
+//     return <div>두 번째</div>
+// });
 
 
 

@@ -23,8 +23,9 @@ function reducer2(state = alertBase, action) {
 }
 
 let defaultState = [
-  {id:0, name : '리덕스 신발', quan: 2},
-  {id:1, name: '리액트 신발', quan: 1}]; //state 초기값
+  {id:0, name : 'White and Black', quan: 2}
+  // ,{id:1, name: '리액트 신발', quan: 1}
+]; //state 초기값
 
 
 // redux에서는 state 데이터의 수정하는 방법을 미리 정의함(state 데이터 관리기능)-Cart수량
@@ -60,8 +61,8 @@ function reducer(state = defaultState, action) {
 
   } if ( action.type === '수량감소'){
     let copy = [...state];
-    if (copy[0].quan > 0)
-    copy[0].quan--;
+    if (copy[action.payload].quan > 0)
+    copy[action.payload].quan--;
     return copy
   }
 
