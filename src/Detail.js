@@ -84,7 +84,8 @@ function Detail(props) {
 
         <div className="row">
          <div className="col-md-6">
-        <img src="https://codingapple1.github.io/shop/shoes1.jpg" width="100%" />
+        {/* <img src="https://codingapple1.github.io/shop/shoes1.jpg" width="100%" /> */}
+        <img src={'https://codingapple1.github.io/shop/shoes' + (상품상세.id+1) + '.jpg'} width='100%;'/>
       </div>
       <div className="col-md-6 mt-4">
         <h4 className="pt-5">{상품상세.title}</h4>
@@ -95,7 +96,8 @@ function Detail(props) {
 
          {/* 주문하기 버튼 누를때 재고-1 하기 */}
         <button className="btn btn-danger" onClick={()=> {
-            props.재고변경([9,10,11])
+            // 재고변경 각각으로 수정하기
+            // props.재고변경([9,10,11])
 
             //※ 이건 하드코딩 버전... 상품에 따른 데이터가 입력되게 하기, 같은 상품이 이미 있으면 수량만 증가시키는 기능
             props.dispatch({type : '항목추가', payload : {id:상품상세.id, name:상품상세.title, quan : 1}});

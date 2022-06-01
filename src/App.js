@@ -14,7 +14,7 @@ import reactRouterDom from 'react-router-dom';
 import Cart from './Cart.js';
 
 // html 파일에서 이미지 사용할 때는 import 하고 {}로 사용하기
-import grim from './background.jpg';
+import grim from './backShoe2.jpg';
 import { useHistory } from 'react-router-dom';
 
 // lazy 속성, Suspense 사용
@@ -46,8 +46,8 @@ function App() {
       <Nav className="me-auto">
         <Nav.Link as={Link} to="/">Home</Nav.Link>
         <Nav.Link as={Link} to="/detail/1">Detail</Nav.Link>
+        <Nav.Link as={Link} to="/cart">Cart</Nav.Link>
         <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-          <NavDropdown.Item as={Link} to="/cart">Cart</NavDropdown.Item>
           <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
           <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
           <NavDropdown.Divider />
@@ -63,9 +63,10 @@ function App() {
 
       <Route exact path="/">
       <div className='bae' style={{ backgroundImage : 'url('+ grim +')'}}>
-        <h1>신발 파는 곳!</h1>
-        <p>여러 종류의 신발을 판매하는 쇼핑몰 입니다</p>
-        <Button variant="primary">Show More</Button>{' '}
+        <br/>
+        <h1>신발 쇼핑몰!</h1>
+        <br/><p>다양한 종류의 신발을 판매하는 쇼핑몰 입니다</p>
+        {/* <Button variant="primary">Show More</Button>{' '} */}
         </div>
 
         <div className='container'>

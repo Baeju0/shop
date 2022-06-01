@@ -23,7 +23,7 @@ function reducer2(state = alertBase, action) {
 }
 
 let defaultState = [
-  {id:0, name : 'White and Black', quan: 2}
+  {id:0, name : 'White and Black', quan: 0}
   // ,{id:1, name: '리액트 신발', quan: 1}
 ]; //state 초기값
 
