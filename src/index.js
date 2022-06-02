@@ -24,7 +24,7 @@ function reducer2(state = alertBase, action) {
 
 let defaultState = [
   {id:0, name : 'White and Black', quan: 0}
-  // ,{id:1, name: '리액트 신발', quan: 1}
+  ,{id:1, name: '리액트 신발', quan: 1}
 ]; //state 초기값
 
 
@@ -97,7 +97,7 @@ ReactDOM.render(
 reportWebVitals();
 
 
-// *새로운 상품 수량 추가 버그
+// *새로운 상품 수량 추가 버그 -> 해결 -> 한줄 알았는데 더 이상해짐 다시
 // *주문하기 버튼 옆에 수량 input 생성
 // *상품 사이즈 저장 or 상품 사이즈 선택
 // *장바구니 항목 삭제

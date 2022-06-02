@@ -40,6 +40,24 @@ function Detail(props) {
     let [tab, setTab] = useState(0);
     let [스위치, 스위치클릭] = useState(false);
 
+    let [lately, setLately] = useState([]);
+
+    // 누가 Detail 페이지 들어가면(useEffect)
+    // localStorage에 있는 항목을 꺼낸다(localStorage.getItem, 변수에 저장)
+    // 두 가지의 경우 (if문 사용, 값이 null일 경우와 값이 있는 경우)
+    useEffect(()=> { 
+      var lately = localStorage.getItem('lately');
+      lately = JSON.parse(lately);
+      },[]);
+   
+    // useEffect(()=> {
+    //   if(window.localStorage.getItem('lately') === null) {
+    //     return null
+    //   } else (window.localStorage.getItem('lately')) {
+
+    //   }
+    // },[]);
+
 
     // 컴포넌트 로드 시 ajax로 데이터 가져오고 싶을 때!
     // useEffect(()=> {
@@ -66,6 +84,7 @@ function Detail(props) {
 
     return(
     <div className="container">
+      
          <박스>
         <제목 className = "red">Detail</제목>
          </박스>
