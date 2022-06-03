@@ -45,18 +45,37 @@ function Detail(props) {
     // 누가 Detail 페이지 들어가면(useEffect)
     // localStorage에 있는 항목을 꺼낸다(localStorage.getItem, 변수에 저장)
     // 두 가지의 경우 (if문 사용, 값이 null일 경우와 값이 있는 경우)
-    useEffect(()=> { 
-      var lately = localStorage.getItem('lately');
-      lately = JSON.parse(lately);
-      },[]);
-   
-    // useEffect(()=> {
-    //   if(window.localStorage.getItem('lately') === null) {
-    //     return null
-    //   } else (window.localStorage.getItem('lately')) {
 
-    //   }
-    // },[]);
+    // ※ 주의점 localStorage에 object자료를 저장하면 object가 깨짐, 문자나 숫자만 저장 가능
+// 하지만, localStorage에 object를 글자인척!"" 하면 저장됨(JSON자료형)
+// ex) localStorage.setItem('obj',JSON.stringify({name:'kim"}))
+// 출력할 때도 글자로 나오기 때문에 object로 바꾸기 위해서 변수로 저장하고 JSON.parse() 사용
+
+    // useEffect(()=> { 
+    //   var lately = localStorage.getItem('lately');
+    //   lately = JSON.parse(lately);
+    //   },[]);
+   
+    useEffect(()=> {
+      // setLately(localStorage.setItem('lately',[상품상세.id]));
+      localStorage.setItem('lately',[상품상세.id]); //들어가면 기록 저장
+      
+      var lately1 = localStorage.getItem('lately'); //기록 가져오기
+      lately1 = JSON.parse(lately1); //obj자료형으로 바꿈
+
+      var lately2 = [...lately]; // setLately변수에 저장하기 위해서 lately 복사
+      lately2.unshift(JSON.parse(lately1)); //lately에 배열 추가
+      setLately(lately2); // setLately에 복사한 배열 저장
+
+      // if(lately1 === null) {
+      //   return null
+      // }
+      //  else if(lately1) {
+      //   return <div>{상품상세.title}</div>
+      // }
+    },[]);
+    //앆ㄲㄲㄲㄲㄲ!!!!!!!!!!
+    
 
 
     // 컴포넌트 로드 시 ajax로 데이터 가져오고 싶을 때!
