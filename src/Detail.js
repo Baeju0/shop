@@ -40,7 +40,7 @@ function Detail(props) {
     let [tab, setTab] = useState(0);
     let [스위치, 스위치클릭] = useState(false);
 
-    let [lately, setLately] = useState([]);
+    // let [lately, setLately] = useState([]);
 
     // 누가 Detail 페이지 들어가면(useEffect)
     // localStorage에 있는 항목을 꺼낸다(localStorage.getItem, 변수에 저장)
@@ -51,30 +51,58 @@ function Detail(props) {
 // ex) localStorage.setItem('obj',JSON.stringify({name:'kim"}))
 // 출력할 때도 글자로 나오기 때문에 object로 바꾸기 위해서 변수로 저장하고 JSON.parse() 사용
 
+// 최근 본 항목, try1
     // useEffect(()=> { 
     //   var lately = localStorage.getItem('lately');
     //   lately = JSON.parse(lately);
     //   },[]);
    
-    useEffect(()=> {
-      // setLately(localStorage.setItem('lately',[상품상세.id]));
-      localStorage.setItem('lately',[상품상세.id]); //들어가면 기록 저장
+// 최근 본 항목, try2
+    // useEffect(()=> {
+    //   // setLately(localStorage.setItem('lately',[상품상세.id]));
+    //   localStorage.setItem('lately',[상품상세.id]); //들어가면 기록 저장
       
-      var lately1 = localStorage.getItem('lately'); //기록 가져오기
-      lately1 = JSON.parse(lately1); //obj자료형으로 바꿈
+    //   var lately1 = localStorage.getItem('lately'); //기록 가져오기
+    //   lately1 = JSON.parse(lately1); //obj자료형으로 바꿈
 
-      var lately2 = [...lately]; // setLately변수에 저장하기 위해서 lately 복사
-      lately2.unshift(JSON.parse(lately1)); //lately에 배열 추가
-      setLately(lately2); // setLately에 복사한 배열 저장
+    //   var lately2 = [...lately]; // setLately변수에 저장하기 위해서 lately 복사
+    //   lately2.unshift(JSON.parse(lately1)); //lately에 배열 추가
+    //   setLately(lately2); // setLately에 복사한 배열 저장
 
-      // if(lately1 === null) {
-      //   return null
-      // }
-      //  else if(lately1) {
-      //   return <div>{상품상세.title}</div>
-      // }
-    },[]);
+    //   // if(lately1 === null) {
+    //   //   return null
+    //   // }
+    //   //  else if(lately1) {
+    //   //   return <div>{상품상세.title}</div>
+    //   // }
+    // },[]);
     //앆ㄲㄲㄲㄲㄲ!!!!!!!!!!
+
+// 최근 본 항목, exp
+    // Detail 페이지 접속하면
+    useEffect(()=> {
+      // localStorage 데이터 불러오기
+      var arr = localStorage.getItem('watched');
+      // null이 나오면 []을 추가해주고, 배열[]이 있을 경우 JSON.parse()
+      if( arr == null ){
+        { arr = [] }
+      } else {
+         arr = JSON.parse(arr);
+        }
+
+      //[].push(현재상품id)
+      arr.push(id);
+      
+      // 중복 제거 - js에서의 중복 제거해주는 set 자료형이 있음
+      //(1,2,2,3)
+      arr = new Set(arr);
+      // arr를 다시 []로 넣기
+      arr = [...arr];
+
+      // localStorage에 다시 저장
+      localStorage.setItem('watched', JSON.stringify(arr));
+
+    },[])
     
 
 
