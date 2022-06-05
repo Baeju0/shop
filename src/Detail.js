@@ -40,6 +40,8 @@ function Detail(props) {
     let [tab, setTab] = useState(0);
     let [스위치, 스위치클릭] = useState(false);
 
+    let [watched, setWatched] = useState(true);
+
     // let [lately, setLately] = useState([]);
 
     // 누가 Detail 페이지 들어가면(useEffect)
@@ -102,7 +104,10 @@ function Detail(props) {
       // localStorage에 다시 저장
       localStorage.setItem('watched', JSON.stringify(arr));
 
-    },[])
+      // UI로 만들기
+      return(
+      <p>{localStorage.getItem(Object('watched'))}</p>)
+    },[]);
     
 
 
@@ -176,7 +181,7 @@ function Detail(props) {
         <button className="btn btn-danger" onClick={()=>{
             history.goBack();
             // history.push('/') 이 경로로 이동시켜주세요! 하면 이동시켜줌
-        }}>뒤로가기</button> 
+        }}>뒤로가기</button>
       </div>
     </div>
 
@@ -196,6 +201,7 @@ function Detail(props) {
          </Nav.Item>
         </Nav>
 
+      <p>{localStorage.getItem('watched')}</p>
 
          {/* CSSTransition은 yarn add react-transition-group 설치해서 사용하는 애니메이션 라이브러리 */}
          {/* 애니메이션 효과를 적용하고 싶은 곳 감싸기 */}
@@ -213,7 +219,19 @@ function Detail(props) {
     </div>
      )
   }
-  
+
+  // Cart.try3
+  // function Watched(props) {
+  //   useEffect(()=> {
+  //     var watch = localStorage.getItem('watched');
+  //     watch = JSON.parse(watch);
+  //   },[])
+  //   return(
+  //     <div>{props.watch}</div>
+  //   )
+  // }
+
+
   function TabContent(props) {
 
     useEffect(()=> {
